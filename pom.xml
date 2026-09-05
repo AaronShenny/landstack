@@ -78,7 +78,22 @@
 			<artifactId>h2</artifactId>
 			<scope>test</scope>
 		</dependency>
-	<dependency><groupId>org.springframework.boot</groupId><artifactId>spring-boot-starter-security</artifactId></dependency><dependency><groupId>io.jsonwebtoken</groupId><artifactId>jjwt-api</artifactId><version>0.12.3</version></dependency><dependency><groupId>io.jsonwebtoken</groupId><artifactId>jjwt-impl</artifactId><version>0.12.3</version><scope>runtime</scope></dependency><dependency><groupId>io.jsonwebtoken</groupId><artifactId>jjwt-jackson</artifactId><version>0.12.3</version><scope>runtime</scope></dependency><dependency><groupId>org.springframework.boot</groupId><artifactId>spring-boot-starter-aop</artifactId></dependency><dependency><groupId>org.geotools</groupId><artifactId>gt-main</artifactId><version>${geotools.version}</version></dependency><dependency><groupId>org.geotools</groupId><artifactId>gt-epsg-hsql</artifactId><version>${geotools.version}</version></dependency><dependency><groupId>org.projectlombok</groupId><artifactId>lombok</artifactId><optional>true</optional></dependency><dependency><groupId>org.geotools</groupId><artifactId>gt-referencing</artifactId><version>${geotools.version}</version></dependency></dependencies>
+	<dependency><groupId>org.springframework.boot</groupId><artifactId>spring-boot-starter-security</artifactId></dependency><dependency><groupId>io.jsonwebtoken</groupId><artifactId>jjwt-api</artifactId><version>0.12.3</version></dependency><dependency><groupId>io.jsonwebtoken</groupId><artifactId>jjwt-impl</artifactId><version>0.12.3</version><scope>runtime</scope></dependency><dependency><groupId>io.jsonwebtoken</groupId><artifactId>jjwt-jackson</artifactId><version>0.12.3</version><scope>runtime</scope></dependency><dependency><groupId>org.springframework.boot</groupId><artifactId>spring-boot-starter-aop</artifactId></dependency><dependency><groupId>org.geotools</groupId><artifactId>gt-main</artifactId><version>${geotools.version}</version></dependency><dependency><groupId>org.geotools</groupId><artifactId>gt-epsg-hsql</artifactId><version>${geotools.version}</version></dependency><dependency><groupId>org.projectlombok</groupId><artifactId>lombok</artifactId><optional>true</optional></dependency><dependency><groupId>org.geotools</groupId><artifactId>gt-referencing</artifactId><version>${geotools.version}</version></dependency>    <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-test</artifactId>
+        <scope>test</scope>
+    </dependency>
+    <dependency>
+        <groupId>com.jayway.jsonpath</groupId>
+        <artifactId>json-path</artifactId>
+    </dependency>
+
+    <dependency>
+        <groupId>org.geotools</groupId>
+        <artifactId>gt-geojson</artifactId>
+        <version>${geotools.version}</version>
+    </dependency>
+</dependencies>
 
 	<repositories><repository><id>osgeo</id><name>OSGeo Release Repository</name><url>https://repo.osgeo.org/repository/release/</url></repository></repositories><build>
 		<plugins>
@@ -90,3 +105,7 @@
 	</build>
 
 </project>
+
+
+
+

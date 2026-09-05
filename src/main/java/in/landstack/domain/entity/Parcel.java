@@ -37,6 +37,12 @@ public class Parcel {
     private String localParcelId;
     
     private Polygon geom;
+
+    @Column(name = "source_crs")
+    private String sourceCrs;
+
+    @Column(name = "source_geom", columnDefinition = "geometry(Polygon)")
+    private Polygon sourceGeom;
     
     @Column(columnDefinition = "numeric(10,2)")
     private Double areaSqm;
@@ -44,3 +50,4 @@ public class Parcel {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 }
+

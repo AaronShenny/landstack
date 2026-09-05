@@ -2,6 +2,7 @@ package in.landstack;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.TaskScheduler;
@@ -9,6 +10,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 
 @SpringBootApplication
 @EnableScheduling
+@EnableCaching
 public class LandStackApplication {
 
     public static void main(String[] args) {
@@ -23,3 +25,4 @@ public class LandStackApplication {
         return scheduler;
     }
 }
+

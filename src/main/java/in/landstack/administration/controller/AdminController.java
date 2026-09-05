@@ -47,4 +47,36 @@ public class AdminController {
     public ResponseEntity<List<Object>> getAllRoles() {
         return ResponseEntity.ok(List.of());
     }
+
+    @org.springframework.beans.factory.annotation.Autowired
+    private in.landstack.interoperability.scheduler.DynamicSyncScheduler dynamicSyncScheduler;
+
+    @org.springframework.beans.factory.annotation.Autowired
+    private in.landstack.domain.repository.SyncJobRepository syncJobRepository;
+
+    @PostMapping("/adapters/{stateCode}/sync/trigger")
+    public ResponseEntity<?> triggerManualSync(@PathVariable String stateCode) {
+        in.landstack.domain.entity.StateAdapter adapter = stateAdapterRepository.findById(stateCode).orElse(null);
+        if (adapter == null) {
+            return ResponseEntity.notFound().build();
+        }
+        in.landstack.domain.entity.SyncJob job = dynamicSyncScheduler.executeSyncJob(adapter);
+        return ResponseEntity.ok(job);
+    }
+
+    @GetMapping("/sync-jobs")
+    public ResponseEntity<java.util.List<in.landstack.domain.entity.SyncJob>> getSyncJobs(
+            @org.springframework.web.bind.annotation.RequestParam(required = false) String stateCode,
+            @org.springframework.web.bind.annotation.RequestParam(required = false) String status) {
+            
+        if (stateCode != null && status != null) {
+            return ResponseEntity.ok(syncJobRepository.findByStateAdapter_StateCodeAndStatusOrderByStartedAtDesc(stateCode, status));
+        } else if (stateCode != null) {
+            return ResponseEntity.ok(syncJobRepository.findByStateAdapter_StateCodeOrderByStartedAtDesc(stateCode));
+        } else if (status != null) {
+            return ResponseEntity.ok(syncJobRepository.findByStatusOrderByStartedAtDesc(status));
+        }
+        return ResponseEntity.ok(syncJobRepository.findAll(org.springframework.data.domain.Sort.by(org.springframework.data.domain.Sort.Direction.DESC, "startedAt")));
+    }
 }
+

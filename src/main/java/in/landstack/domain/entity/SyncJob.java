@@ -1,6 +1,7 @@
 package in.landstack.domain.entity;
 
 import jakarta.persistence.Entity;
+import org.hibernate.annotations.Filter;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.ManyToOne;
@@ -11,6 +12,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "sync_jobs")
+@Filter(name = "stateFilter", condition = "state_code = :stateCode")
 @Data
 public class SyncJob {
     @Id
@@ -26,3 +28,6 @@ public class SyncJob {
     private Integer recordsUpdated;
     private String errorLog;
 }
+
+
+

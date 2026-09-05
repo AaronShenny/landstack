@@ -6,6 +6,8 @@ import jakarta.persistence.Table;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.JoinColumn;
 import lombok.Data;
+import org.locationtech.jts.geom.Polygon;
+import jakarta.persistence.Column;
 
 @Entity
 @Table(name = "villages")
@@ -20,3 +22,4 @@ public class Village {
     
     private String name;
 }
+

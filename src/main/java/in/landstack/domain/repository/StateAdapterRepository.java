@@ -8,5 +8,6 @@ import java.util.List;
 
 @Repository
 public interface StateAdapterRepository extends JpaRepository<StateAdapter, String> {
-    List<StateAdapter> findByStatus(String status);
+    List<StateAdapter> findByStatus(in.landstack.domain.enums.AdapterStatus status);
 }
+

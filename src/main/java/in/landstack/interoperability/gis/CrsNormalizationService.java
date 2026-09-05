@@ -1,6 +1,10 @@
 package in.landstack.interoperability.gis;
 
+import org.geotools.geometry.jts.JTS;
+import org.geotools.referencing.CRS;
 import org.locationtech.jts.geom.Geometry;
+import org.geotools.api.referencing.crs.CoordinateReferenceSystem;
+import org.geotools.api.referencing.operation.MathTransform;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -20,15 +24,29 @@ public class CrsNormalizationService {
             return null;
         }
 
-        if (TARGET_CRS.equalsIgnoreCase(sourceCrsEpsgCode) || sourceCrsEpsgCode == null) {
+        if (sourceCrsEpsgCode == null || "CRS_UNKNOWN".equalsIgnoreCase(sourceCrsEpsgCode)) {
+            logger.warn("Source CRS is null or unknown. Assuming geometry is already EPSG:4326.");
+            sourceGeometry.setSRID(4326);
             return sourceGeometry;
         }
 
-        // NOTE: GeoTools MathTransform logic requires properly resolving OSGeo maven dependencies.
-        // For compilation purposes in this prototype, we return the geometry as-is.
-        // In production, this would use org.geotools.referencing.CRS and JTS.transform.
-        logger.warn("GeoTools CRS transformation stubbed. Assuming geometry is already EPSG:4326.");
-        sourceGeometry.setSRID(4326);
-        return sourceGeometry;
+        if (TARGET_CRS.equalsIgnoreCase(sourceCrsEpsgCode)) {
+            sourceGeometry.setSRID(4326);
+            return sourceGeometry;
+        }
+
+        try {
+            CoordinateReferenceSystem sourceCRS = CRS.decode(sourceCrsEpsgCode, true);
+            CoordinateReferenceSystem targetCRS = CRS.decode(TARGET_CRS, true);
+            MathTransform transform = CRS.findMathTransform(sourceCRS, targetCRS, true);
+            
+            Geometry targetGeometry = JTS.transform(sourceGeometry, transform);
+            targetGeometry.setSRID(4326);
+            return targetGeometry;
+        } catch (Exception e) {
+            logger.error("Failed to transform geometry from {} to {}: {}", sourceCrsEpsgCode, TARGET_CRS, e.getMessage());
+            throw new IllegalArgumentException("CRS Transformation Failed: " + e.getMessage(), e);
+        }
     }
 }
+

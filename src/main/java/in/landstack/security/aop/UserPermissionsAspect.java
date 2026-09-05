@@ -28,7 +28,7 @@ public class UserPermissionsAspect {
     @Autowired
     private UserPermissionRepository userPermissionRepository;
 
-    @Before("execution(* in.landstack.domain.repository.*.*(..))")
+    @Before("execution(* in.landstack.domain.repository.ParcelRepository.*(..)) || execution(* in.landstack.domain.repository.SyncJobRepository.*(..)) || execution(* in.landstack.domain.repository.StateAdapterRepository.*(..)) || execution(* in.landstack.domain.repository.AdapterEndpointRepository.*(..)) || execution(* in.landstack.domain.repository.AdapterFieldMappingRepository.*(..))")
     public void enableUserPermissionsFilter() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null && authentication.isAuthenticated() && !authentication.getPrincipal().equals("anonymousUser")) {
@@ -49,3 +49,5 @@ public class UserPermissionsAspect {
         }
     }
 }
+
+

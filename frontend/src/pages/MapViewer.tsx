@@ -1,4 +1,4 @@
-import React, { useState, useRef, useMemo, useCallback } from 'react';
+import { useState, useRef, useMemo, useCallback } from 'react';
 import Map, { Source, Layer, MapRef, FillLayer, LineLayer } from 'react-map-gl/maplibre';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import { useQuery } from '@tanstack/react-query';
@@ -8,6 +8,7 @@ import { api } from '../services/api';
 const fillLayerStyle: FillLayer = {
   id: 'parcels-fill',
   type: 'fill',
+  source: 'parcels',
   paint: {
     'fill-color': '#3b82f6',
     'fill-opacity': 0.2
@@ -17,6 +18,7 @@ const fillLayerStyle: FillLayer = {
 const lineLayerStyle: LineLayer = {
   id: 'parcels-line',
   type: 'line',
+  source: 'parcels',
   paint: {
     'line-color': '#1d4ed8',
     'line-width': 2
@@ -159,3 +161,5 @@ export default function MapViewer() {
     </div>
   );
 }
+
+

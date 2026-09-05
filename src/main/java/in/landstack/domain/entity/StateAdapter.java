@@ -25,6 +25,8 @@ public class StateAdapter {
     private String baseUrl;
     private String authType;
     private String authCredentials;
-    private String status;
+    @jakarta.persistence.Enumerated(jakarta.persistence.EnumType.STRING)
+    private in.landstack.domain.enums.AdapterStatus status;
     private String syncCronExpression;
 }
+
