@@ -1,0 +1,1062 @@
+# What Is Land?
+
+A piece of land is simply a physical part of the earth’s surface – the soil, rocks, or built‐on area that you can touch and see. In government records, **land** often refers to a parcel or plot with defined boundaries. For example, imagine a rectangular farm next to a road:
+
+```
+        ROAD
+
+┌────────────────────┐
+│                    │
+│     MY LAND        │
+│                    │
+│                    │
+└────────────────────┘
+```
+
+This **physical land** has a shape (a boundary line) and an area (the space inside). The **boundary** is the edge of the land parcel. The government and land surveyors identify and record this piece of land as a unique *parcel* or *holding*. A **parcel (or plot)** is a specific portion of land with boundaries. A **property** is another word for land that someone owns or has rights to.  
+
+Rights over the land can include **ownership** (holding title as a person or institution) and **possession** (actually using or living on the land). For example, you might own a parcel (be the title owner) but a tenant could have possession (living there). Governments keep **records** of who has which rights to each parcel. These records are the *information* about the land – not the land itself. 
+
+In short, **physical land** is the real ground and space we walk on; **information about that land** is the legal and survey data that describes it. A piece of land’s info might list its boundaries, who owns it, its size, and any restrictions. For example, our rectangle above might be recorded as 1000 square meters owned by Alice, with a road on one side. The **boundary points** of the rectangle might be measured with numbers (coordinates) in a survey. 
+
+**Official fact:** A cadastral system (land records) “provides a precise description and identification of particular pieces of land and acts as a continuous record of rights in land”. This means governments use maps and documents together to describe each parcel clearly.
+
+# How Does the Government Identify a Piece of Land?
+
+Every parcel of land is given a **label or identifier** in the records, like a name or number. In India’s rural records, this is usually called a **survey number** (or **khasra number** in some states). For example, within a village, each plot might be Survey No. 49, Survey No. 50, etc. If a single survey number covers multiple smaller pieces after further surveying, those get **subdivision numbers**. So you might see something like:
+
+```
+Village: Kurichi
+  ↓
+Block: 356
+  ↓
+Survey Number: 49
+  ↓
+Subdivision 1 (Survey No. 49/1)
+Subdivision 2 (Survey No. 49/2)
+```
+
+These numbers are **labels**, not shapes. Survey No. 49/1 doesn’t by itself tell you the land’s shape or size — it just refers to a particular record entry. (Think of it like a street address: it names a property but doesn’t give a map.) The government **maps** each survey number to the actual boundary on a cadastral map.
+
+Thus, the government needs **both a label and a map** for each parcel. The label (like Survey No. 49/1) is a simple identifier used in paperwork. The map (cadastral map) shows the **actual shape** of the land. Modern systems also often assign a globally unique identifier – for example, **ULPIN** (Unique Land Parcel Identification Number) – which is based on the land’s coordinates. This acts like an “Aadhaar number for land,” ensuring each parcel has a unique ID nationwide.
+
+# How Does a Surveyor Actually Survey the Land?
+
+Imagine a surveyor arriving at a village to map land parcels. The surveyor’s job is to measure each parcel’s boundaries very accurately. Here’s how it usually goes:
+
+1. **Preparation and old records:** The surveyor gets old maps and records from the Survey Department. These might include a paper **cadastral map** and descriptions from past surveys. This helps locate and verify the parcel on the ground. 
+
+2. **Landowner’s help:** The landowner or local officials show the parcel and boundary points on the ground. They may mention known boundary markers (like old fence posts, trees, or walls).
+
+3. **Boundary points identification:** Together, they identify the **corner points** of the parcel. Each corner is a physical point on the ground. For our rectangle, there are four corners (P1, P2, P3, P4).
+
+4. **Measuring equipment:** Surveyors use tools like a **Total Station** (which measures angles and distances precisely) or **GPS** units (for high-precision coordinates). Today’s digital surveys often use GPS or a network of reference stations (CORS) for accuracy.
+
+5. **What is measured:** The equipment measures the location of each boundary point relative to a coordinate system. In old days, they used chains and angles; now they use electronic distance measurement and satellites. For each corner point, they get numeric **coordinates** (numbers like X and Y, or latitude/longitude depending on system).
+
+6. **Many coordinates, one shape:** They record all corner points in order. Then they connect the points on a map to form the parcel’s shape (a polygon). So the process is:
+
+```
+Physical boundary on ground 
+     ↓
+Corners (boundary points identified) 
+     ↓
+Coordinates for each corner (via GPS/Total Station) 
+     ↓
+Connect points in order 
+     ↓
+Polygon shape on map 
+```
+
+Each **boundary point** gets coordinates. For example, point P1 = (10,20), P2 = (30,20), P3 = (30,10), P4 = (10,10). The connected points form the polygon of the land. The surveyor will list these coordinates in the survey note.
+
+Throughout, the surveyor also notes the **distances and angles** between points. This information is used to calculate area and ensure the shape closes correctly. After surveying, the surveyor prepares a draft map (sketch) and a measurement report.
+
+**Official fact:** Cadastral maps and registers work together: each land parcel gets a property identifier (like a survey number) that links the map to the written records. The surveyor’s measurements populate the map portion, while the record (Register) has the identifier and rights information.
+
+# Explaining the Map in Very Simple Terms
+
+A **map** of a parcel shows the parcel’s shape using points and lines. The simplest parcel is a polygon. For example, take our rectangle parcel with corner points labeled P1, P2, P3, P4:
+
+```
+P1────────P2
+│          │
+│          │
+│          │
+P4────────P3
+```
+
+In a computer, this is stored by listing each point’s coordinates in order:
+
+```
+Point P1 = (x1, y1) = (10, 20)
+Point P2 = (x2, y2) = (30, 20)
+Point P3 = (x3, y3) = (30, 10)
+Point P4 = (x4, y4) = (10, 10)
+```
+
+Then the computer records the polygon as [P1, P2, P3, P4] (and back to P1 to close it). This list of points is the computer’s way of representing the **boundary (lines)** of the land. 
+
+From this polygon, the computer can calculate many things:
+- **Area:** How big is the parcel? (computes 400 sq units here).
+- **Boundary length:** Perimeter, distance around the parcel.
+- **Location:** Where on a larger map it lies.
+- **Neighbors:** Which other parcels are next to it.
+- **Overlap or gaps:** If boundaries match neighbors.
+
+So a map (polygon) plus an ID makes a parcel in the computer. This is the base layer of a land system.
+
+# Why Do Coordinates Sometimes Look Strange?
+
+Coordinates like `(325.9475, -184.57085)` or any numbers by themselves have no fixed meaning until you know **what coordinate system or map projection** they belong to. In India, many old survey maps use **local planar coordinate systems**, not the global latitude/longitude (WGS84) that GPS/Google Maps uses. For example, Indian cadastral surveys often used a **Cassini-Soldner projection** tied to each district or state. In such systems, `x` and `y` might be in meters from some local origin, and they could even be negative or use a local datum.
+
+That’s why you *cannot directly paste* old survey coordinates into Google Maps: the values aren’t lat/long. To convert them, one must **georeference** the cadastral map to a known global system. This involves knowing the original projection parameters or identifying a few control points with known global coordinates, and then transforming the entire map.
+
+In other words, `(325.9475, -184.57085)` might be in a local northing/easting system for Kerala surveys, not degrees. We have to tell the computer, “these coordinates are in, say, Cassini from Kerala’s base point,” to translate them into GPS lat/long. Modern efforts are underway to tie (“geo-reference”) all cadastral maps to global coordinates so that every parcel can be shown correctly on tools like Google Maps.
+
+**Research finding:** Many of India’s old cadastral maps “do not conform to any conventional known map projection,” which means each state’s surveys used their own local system. Only after the maps are processed and tied to the latitude/longitude grid (e.g. UTM or WGS84) can the parcel coordinates be used in standard mapping apps.
+
+# Example: One Real Parcel in Kerala
+
+Let’s use a real example to tie these ideas together. In Kerala, consider a small urban parcel:
+
+- **District:** Ernakulam  
+- **Taluk:** Kanayannur  
+- **Village:** Thekkumbhagam  
+- **Block:** 356  
+- **Survey No.:** 49/1 (subdivision 1 of survey 49)  
+- **Area:** 292.94 square meters  
+
+The Survey of India notes for this parcel show **seven boundary coordinates** (latitude/longitude in degrees, after georeferencing). In simple form, imagine we have:
+
+```
+Point 1 (P1): (Latitude 10.1195, Longitude 76.3072)
+Point 2 (P2): (10.1196, 76.3074)
+Point 3 (P3): (10.1194, 76.3075)
+Point 4 (P4): (10.1192, 76.3073)
+...
+```
+
+(These are illustrative.) Connecting P1→P2→P3→P4→P1 forms the polygon of the parcel. In a digital system we would store:
+
+```
+Coordinates: P1, P2, P3, P4 (closing back to P1)  
+Area: 292.94 m²  
+Survey: 49  
+Subdivision: 1  
+Village: Thekkumbhagam, Ernakulam  
+```
+
+Each **field** has meaning:
+- *Survey No.* (49/1) and location (village/block) are the traditional identifiers in Kerala’s revenue records.
+- *Area* is what the map’s coordinates define.
+- The seven coordinate pairs precisely trace the land’s corners and edges.
+
+What’s still needed before this parcel “appears” on a Google map? We need a coordinate reference frame. The seven coords above (latitude/longitude) must be in a **known datum** (likely WGS84 or Indian Datum). If they came from Kerala’s `Digital Survey`, they likely are already in a global CRS, so one could plot them on Google Maps. But if they were raw local grid values, we’d need to translate them first.
+
+In summary, this example shows:
+- How survey data (seven lat/long points) create the parcel polygon.
+- The traditional identifiers (village, block, survey) that label it in records.
+- And that without knowing the correct projection, raw survey coordinates cannot be used directly.
+
+# What Happens After the Survey?
+
+After a surveyor finishes measuring a parcel, that parcel’s new shape and coordinates go through a review process before becoming the “official” record:
+
+1. **Initial Checking:** The Survey Department checks the measurement calculations. They ensure the boundaries form a closed polygon and compute the **area**. 
+
+2. **Digitization:** Often, the new map (sketch) is digitized into the cadastral database. The survey sketch is compared with old maps to resolve overlaps or gaps.
+
+3. **Draft Records:** A provisional Record of Rights (RoR) or ledger may be prepared showing the new area and boundary. Local officials notify affected landowners about the changes.
+
+4. **Public Notice:** The updated survey results are usually published for public information. Citizens can see the revised boundary and area in village offices or online (in many places).
+
+5. **Objections/Corrections:** There is usually a period when landowners can raise objections if they disagree (e.g. boundary disputes). The Survey and Revenue departments may hold hearings or field checks.
+
+6. **Settlement:** If any dispute is unresolved, there may be a formal settlement or court process. Only after resolution does the survey data become final.
+
+7. **Mutation:** Once the survey data is accepted, the Revenue Department updates the official land records. This means:
+   - The Record of Rights (land register) is updated with the new area and possibly new boundaries.
+   - If the survey created new subdivision (like splitting one parcel into two), new survey numbers or subdivisions are assigned.
+   - If ownership changed during the process (via sale), a mutation entry (title update) is made.
+
+8. **Storage:** The final data (digitized map + RoR) is stored in land records systems and often published online. In Kerala, for instance, many RoRs and maps are now available on the **Ente Bhoomi** portal.
+
+**Official fact:** Under modernization programs, “95.09% of villages” have computerized RoRs and about “68%” of cadastral maps have been digitized. **RoR (text) and map (spatial)** are being linked in many places – e.g. “Text-Map Integration: 84.89% villages” in recent progress. However, note that **survey measurements alone do not immediately become the legal title** until they are processed into final records (via mutation and approvals). The state revenue department (through local officials like the Village Officer or Tehsildar) is typically responsible for these final land record entries.
+
+# Explaining Land Records
+
+Once the land is surveyed, multiple documents track who owns it and any changes. The main ones are:
+
+## Record of Rights (RoR)
+
+The **Record of Rights (RoR)** is the core land record in India. It is maintained by the revenue department. The RoR lists who has what rights in a parcel. It usually includes:
+
+- **Owner/Occupant name:** Who legally holds the land.  
+- **Extent/Area:** How much area (in acres or square meters) the land has.  
+- **Type of ownership/occupancy:** e.g. freehold, lease, tenancy.  
+- **Revenue status:** For agricultural land, the revenue (tax) class or rate may be noted.  
+- **Other rights:** Sometimes it shows mortgages, liens, or government claims.  
+- **History of transactions:** Some RoRs even note previous sales or partitions.
+
+In short, the RoR “shows how rights on land are derived for the land owner, and records the property’s transactions from time to time”. It is the **primary record** for land ownership in rural areas. Because states have different revenue systems, the exact layout of an RoR varies by state. 
+
+*Example:* For our parcel, the RoR might say: “Owner: John Doe; Area: 292.94 m²; Tenant: none; Survey: 49/1; Assessment status: agricultural class I.”
+
+## Mutation
+
+A **mutation** is the process of changing the name of the owner (or other rights) in the land records. This happens when the land is sold or inherited. After a sale deed is registered, the new owner applies for mutation. The Revenue Department then updates the RoR to reflect the new owner’s name. A mutation entry officially records the transfer of title. Mutation doesn’t create title (that’s done by registration of the sale deed); it updates the *existing* records to match the new owner.
+
+**Official fact:** Mutation is defined simply as “recording the transfer or change of title of a property in the land records”. It follows transactions such as inheritance or sale. The mutation register is also kept by the Revenue Department.
+
+## Registration
+
+**Registration** refers to recording a document (like a sale deed) with the Sub-Registrar of Assurances (government office). When you buy or sell land, you sign a sale deed. That deed is submitted to the local Sub-Registrar’s office, and they officially record it. This makes the sale legal and part of public records. 
+
+- A **sale deed** is the document of sale; it includes details of the parties, sale price, and property description.  
+- The registration office issues an **Encumbrance Certificate (EC)** along with the registration, which shows all registrations (deeds) done on that property in recent years.
+
+Registration is handled by a separate department (Registration Department), not the revenue department. Once registered, the deed’s facts must be communicated back to the Revenue Department so that they can do the mutation. Many states are now integrating these offices so that when a deed is registered, the RoR mutation can happen automatically.
+
+## Encumbrance Certificate (EC)
+
+An **Encumbrance Certificate** is a document that summarizes all registered transactions on a property (like sale deeds and mortgages) for a period (often 30 years). It shows the “title chain” of the land. The key point is: 
+
+> An EC **proves that no conflicting registered claims** (like mortgages or liens) exist on the property for the period shown. 
+
+If the EC is clear, it means “as far as registered documents are concerned, there are no legal liabilities attached.” However, an EC by itself *does not* prove outright ownership – it only covers registered charges. Unregistered claims or disputes might still exist. So it’s often said that an EC is necessary evidence for sale but not a 100% title guarantee.
+
+*Example with our parcel:* The EC would list all sale deeds, mortgages etc. for Survey 49/1 for, say, the last 30 years. If John Doe has the last deed and there are no mortgages, the EC will show a clear history, letting a buyer feel safer.
+
+# Why One Parcel Has Many Records
+
+Each **physical parcel** of land is described from different perspectives by different agencies. Here’s a simplified diagram:
+
+```
+                    ONE PHYSICAL PARCEL
+                           │
+          ┌────────────────┼────────────────┐
+          ↓                ↓                ↓
+       GIS Map            RoR          Registration
+     (survey maps)       (ownership)   (transactions)
+          │                │                │
+     Parcel boundary    Land rights     Sale deeds
+```
+
+But there’s more. Think of that parcel: it can have information in **planning, utilities, taxation, etc.** For example:
+
+- **Planning/Master Plan (Urban):** The city’s planning department may have a map showing how the land can be used (residential, commercial) and any building rules.  
+- **Building Permission:** The local municipality might have records of any approved building construction on that parcel.  
+- **Property Tax:** The municipal tax department has the parcel on its books for property taxes (in urban areas) or house tax (rural).  
+- **Land Use/Zoning:** Authorities track if the land is agricultural, residential, commercial, forest, etc.  
+- **Utilities:** Water, electricity, and sewage departments may have infrastructure maps (like water lines or electricity lines) that run through or near the parcel.  
+- **Restrictions/Environment:** Some parcels might lie in a floodplain or near a highway, so regulators keep track of restrictions (like “no high-rise buildings” or “no agriculture” zones).  
+- **Disputes/Courts:** If there are any legal cases involving that parcel (boundary disputes, court orders), those are recorded elsewhere.  
+- **Mortgages/Encumbrances:** Banks may register mortgages (which appear on the EC) or the land could be leased to someone (recorded in revenue).
+
+Each of these records is maintained by different agencies, but they all refer to the **same piece of land**. So, the single parcel has *many different records*:
+- **GIS map (spatial data)** maintained by Survey Department.  
+- **Record of Rights (textual ownership)** by Revenue Department.  
+- **Registration deeds (legal transactions)** by Sub-Registrar’s office.  
+- **Planning and building permits** by Urban Local Body or Planning Dept.  
+- **Tax records** by local tax authority.  
+- **Utility data** by Water/Energy agencies.  
+- **Restrictions/disputes** by various admin or courts.  
+
+Even though they are different types of records, they all talk about the same parcel. To tie them together, we need a **common identifier** (like ULPIN) and a way to cross-reference. 
+
+# The First Big Problem: Fragmentation
+
+If one parcel has all those records, why aren’t they all in **one system**? The answer is: historically, **different departments used different systems, identifiers, and formats**. For example:
+
+- **Revenue Department:** Maintained RoRs and mutation registers (showing ownership).  
+- **Survey Department:** Maintained the maps and survey notes.  
+- **Registration Department:** Maintained sale deeds and ECs.  
+- **Planning Department:** Kept master plan and zoning info.  
+- **Municipal/Tax Department:** Kept property tax records.  
+- **Others (Utilities, Environment):** Each has its own database.
+
+Because each agency built its system separately, they often use **different identifiers**. For instance, a parcel might be Survey 49/1 in one database and Parcel No. 356/49 in another (just an example). The formats can differ (some use village names, others codes). They even speak different languages and units: one state might use square meters, another local “cent” unit; one department’s database is in English, another in the regional language.
+
+Imagine Mr. Kumar wants information about his parcel: he has to ask the revenue office for RoR, the survey office for a map sketch, the sub-registrar for the sale deed, and the municipality for tax dues. Each trip uses different forms and IDs. Data doesn’t flow automatically between them. 
+
+**Official fact:** In India, three different state departments handle land data – revenue (RoR, mutation), survey (maps), and registration (deeds). This fragmented setup “makes it difficult to ensure that survey maps, textual records, and registration records remain consistent”. In other words, there is no easy single answer to “show me everything about parcel X” because each department holds its own piece of the puzzle in separate databases.
+
+# The Second Big Problem: Different States
+
+In India, land is a **State subject** (Entry 18, 45 of the 7th Schedule). This means **each state has its own land laws and systems**. Kerala might call a parcel number “Re-survey No.”, while Rajasthan might use “Khasra No.” or “Dag No.”. Each state developed its own land record formats (records called bhulekh, jamabandi, etc.) and even local terms for the same thing.
+
+For example:
+- In Bihar/Uttar Pradesh, the term *“Khasra”* is used for plot number.  
+- In Maharashtra and Gujarat, *“Survey No.”* or *“Gaonmod”* may be used.  
+- In Punjab/Haryana, *“Khet” or “Khasra No.”* and *“Daag”* are common.  
+- In Kerala, things like *“Re-survey No.”* and *“Pattadar passbook”* are used.  
+
+The bottom line: **Each state’s system is different.** They use different local terms, file formats, and sometimes different languages.
+
+To connect them, the national idea is not to force all states to use identical systems. Instead, they aim for **interoperability** – a common way to link them. For instance, one state’s “Survey No.” is the same concept as another’s “Khasra No.”. A national platform can store all states’ data in a common schema by mapping each state’s fields to general fields like *Parcel Number*, *Local Identifier*, etc. This way, the system knows that “Survey No. 49/1” in Kerala is analogous to “Khasra No. 123” in Uttar Pradesh – both are local parcel numbers.
+
+**Official fact:** Because of India’s diversity, a “Glossary of Revenue Terms” was released to harmonize terms like Khasra, Dag, Pula, etc., in different languages and scripts. The goal is to let data from different states interoperate without forcing one unified terminology. For example, the glossary gives equivalents of land terms in Hindi, English, and the local language.
+
+This is like teaching all departments to speak a common language (or have a dictionary) for basic land concepts, so that when data moves between systems, everyone understands. We might call this “different systems using a common language” – a simpler way of saying *semantic interoperability*.
+
+# Unique Parcel Identifier (ULPIN)
+
+To solve fragmentation, India introduced the **Unique Land Parcel Identification Number (ULPIN)**, also called *Bhu-Aadhaar*. ULPIN is a 14-character alphanumeric code assigned to each land parcel across the country. It is **unique and permanent** for each parcel, and is based on the parcel’s geocoordinates (i.e., the location of its surveyed points).
+
+Key points about ULPIN:
+
+- **Why it exists:** A parcel can have different local numbers, or its Survey No. might change on re-survey. ULPIN gives each parcel a single, unchanging ID so that different databases can refer to it unambiguously. Think of ULPIN as the parcel’s “fingerprint” based on location.
+
+- **What it identifies:** ULPIN identifies the *exact geographic area* of the parcel. If two records in different systems have the same ULPIN, they refer to the same physical land.
+
+- **Not an owner ID:** ULPIN is about the land, not the person. Even if the owner changes, the ULPIN stays the same for that parcel. 
+
+- **Georeferencing link:** It ties together the surveyed geometry (boundary coordinates) with the records. Each coordinate is used to generate part of the ULPIN, so if the land shifts, the number would too.
+
+- **Helps connect records:** Because ULPIN is common, each department can link all data for a parcel using ULPIN rather than state-specific numbers. For example, if the RoR, the map database, and the registration system all store ULPIN, then a query by ULPIN brings up all relevant info.
+
+**Examples:**
+
+- *Whole parcel sold:* If Alice owns a parcel and sells it to Bob, the **owner changes** but the **ULPIN stays the same** (since the parcel’s location didn’t change). Records in all systems can update the owner name, but they all still use the same ULPIN.
+
+- *Parcel subdivided:* Suppose Bob splits one parcel into two new ones. The old parcel’s ULPIN is retired, and each new smaller parcel gets a new ULPIN reflecting their new boundaries. (However, the system keeps a history linking them.) In practice, “each resulting smaller parcel typically receives updates… while maintaining traceable lineage to the original ULPIN”. That means we can track that these two new parcels came from the old parcel.
+
+In summary, ULPIN is a key part of Land Stack: it lets every parcel be “addressed” by one code in the national system. The government’s goal is to assign a ULPIN to every parcel in India (over 36 crore parcels so far) so that different departments’ data can interoperate around that ID.
+
+# Parcel History
+
+A parcel’s story over time can involve sales, mutations, subdivisions, and more. A modern system needs to remember these events:
+
+- **Sale:** When ownership passes by sale, a new sale deed is registered and the RoR is updated (mutation) to show the new owner.
+
+- **Mutation:** Besides sales, any change of title (like inheritance, gift, or division) causes a mutation entry in the land records.
+
+- **Subdivision/Merger:** Land can be subdivided (split) into smaller parcels or merged into a larger one. Each action creates new survey numbers and possibly new ULPINs, but the system should link them. For example:
+
+  ```
+  Old Parcel A (ULPIN 123) (Owner A)
+           ↓  (Subdivision)
+    ┌─────┴─────┐
+    ↓           ↓
+  Parcel B    Parcel C
+  (ULPIN 456) (ULPIN 789)
+  ```
+
+  A proper system would record that B and C came from A on the subdivision date.
+
+- **Resurvey/Boundary correction:** Sometimes surveys are updated, and boundaries slightly change. The new map is compared with old, and records are adjusted.
+
+Keeping history is important so one can trace, for instance, that Parcel B’s ULPIN used to be part of ULPIN 123. This helps verify titles and solve disputes. 
+
+**Official fact:** The ULPIN system is designed so that ULPIN “stays permanently linked” to the same area even if “the land is subdivided or survey numbers get renumbered”. This implies that the system must track what happens to an old ULPIN when parcels change, preserving a lineage for data integrity.
+
+# Government Programs
+
+Several government programs and tools support land record modernization:
+
+- **Department of Land Resources (DoLR):** This central government department (under the Ministry of Rural Development) oversees national land schemes like DILRMP. It provides funding, guidelines, and technical support to states. Officially, “land and its management fall in the domain of the States” (7th Schedule), but the Centre assists by financing and modernizing land records systems. 
+
+- **Digital India Land Records Modernization Programme (DILRMP):** Launched in 2016 (formerly NILRMP from 2008), DILRMP aims to *“develop a modern, comprehensive and transparent land record management system”*. Its goals include:
+  - Computerizing textual RoRs and digitizing cadastral maps.
+  - Integrating RoR with maps (so you can click on a parcel and see the owner).
+  - Computerizing land registration offices and connecting them to revenue offices.
+  - Encouraging cloud data centers, GIS, AI/ML, etc.
+
+  DILRMP has achieved near-total saturation: ~97% of villages have computerized RoRs, ~97% of maps digitized, and ~85% of villages have linked text and maps. Citizens in 19 states can now download digitally signed RoRs online.
+
+- **NAKSHA (National Geospatial Knowledge-based Land Survey of Urban Habitations):** A pilot under DoLR, NAKSHA focuses on urban areas. It uses drones and aerial imagery to quickly survey cities. It created GIS databases of land parcels for 157 cities in 27 states, covering ~4,484 sq km. In 2025 alone, surveys were done in 116 cities covering 5,915 sq km. The idea is to have accurate parcel maps for urban planning and taxes. 
+
+- **Bhu-Naksha:** This is a state-level digital cadastral mapping solution developed by NIC (National Informatics Centre). States like Andhra Pradesh use *Bhu-Naksha* to publish parcel maps online. It “cater[s] to all basic necessities of [a] Patwari with regard to parcel map management,” letting citizens view map data and helping prevent fraud. Each state’s Bhu-Naksha portal allows viewing georeferenced cadastral maps (some tie into land record portals like AP’s BhuNaksha linking to Meebhoomi for actual ownership details). 
+
+- **Ente Bhoomi (Kerala):** Kerala’s “Ente Bhoomi” is an example of a state-level land information system. It is a citizen portal of Kerala’s Integrated Land Information and Management System. Ente Bhoomi combines survey, revenue, and registration records for Kerala. It provides services like downloading RoRs, checking mutation status, and pre-mutation sketch preparation. Ente Bhoomi is part of Kerala’s “Digital Resurvey Mission” to digitize land records.
+
+- **NGDRS (National Generic Document Registration System):** Though not always mentioned together with Land Stack, NGDRS is a central system for land transaction registration. It aims for “One Nation, One Registration” by using a common software for sub-registrar offices across states. As of 2025, 17 states adopted NGDRS, and 88.6% of offices are integrated so that registering a sale deed automatically triggers mutation in revenue records. This reduces delay and errors when transactions occur.
+
+These programmes illustrate the effort to modernize land records. DILRMP/NAKSHA/Bhu-Naksha focus on maps and RoR, NGDRS on legal deeds, while state systems like Ente Bhoomi implement these nationally-coordinated schemes locally.
+
+# Land Stack: What Is It?
+
+**Land Stack** is the new national initiative to unify all land-related information in one GIS-based system. According to the government’s description, it is *“an integrated GIS-based digital platform that brings together all land-related datasets, workflows, and services into a single interoperable framework.”* The vision is to use georeferenced cadastral maps (parcel polygons) at the core, and layer on every type of land data around each parcel.
+
+Land Stack organizes data into three broad **layers**:
+
+- **Base Layer:** The foundation. It includes **georeferenced cadastral maps** and **parcel boundaries** for the area, with each parcel tagged by a **unique identifier** (ULPIN). This layer provides the spatial “canvas” on which all land info is drawn.  
+  *Example:* Every parcel has its polygon with coordinates and ULPIN, so we know exactly where and which parcel we are talking about.
+
+- **Essential Layers:** These are core governance datasets tied to parcels. They include:
+  - **Record of Rights (RoR):** ownership and rights info per parcel.  
+  - **Registration data:** recent sale deed details (e.g. current registered owner, sale history).  
+  - **Master plans and land-use:** what the local plan says this land is for (residential, commercial, etc.).  
+  - **Building permissions:** any approved construction details on that parcel.  
+  - **Encumbrance and mortgage records:** registered liabilities from ECs.  
+  - **Restrictions/Zoning:** any usage restrictions (e.g. no-development zones, environmental rules).  
+
+  Together, the Essential layers answer: *“Who owns this parcel, what can be done on it, and what legal encumbrances exist?”*
+
+- **Additional (Use-Case) Layers:** These extend functionality for more services. They might include:
+  - **Utilities networks:** water lines, electricity grid, roads (to coordinate engineering).  
+  - **Property tax records:** status of tax assessment or payments.  
+  - **Valuation references:** tax values or market values for planning.  
+  - **Infrastructure:** e.g. nearby schools, hospitals (for planning).  
+  - **Environmental layers:** flood zones, forest boundaries, etc.  
+  - **Any other service links:** like building material suppliers, etc. (depending on future needs).
+
+  These layers are optional depending on local needs. They enhance things like disaster response or city services.  
+
+Visually, Land Stack looks like a layered cake (see diagram below) with the parcel map at the base and information layers above:
+
+```
+                  LAND STACK
+
+                BASE LAYER
+        ┌─────────────────────────┐
+        │ Parcel boundaries       │
+        │ Georeferenced maps      │
+        │ Unique parcel ID (ULPIN)│
+        └────────────┬────────────┘
+                     ↓
+              ESSENTIAL LAYERS
+        ┌─────────────────────────┐
+        │ Ownership/RoR           │
+        │ Registration            │
+        │ Land use / Master plan  │
+        │ Building permissions    │
+        │ Encumbrances & mortgages│
+        │ (Zoning, Restrictions)  │
+        └────────────┬────────────┘
+                     ↓
+          ADDITIONAL LAYERS
+        ┌─────────────────────────┐
+        │ Property tax records    │
+        │ Utilities (water, power)│
+        │ Infrastructure (roads,  │
+        │ hospitals, etc.)        │
+        │ Environmental zones     │
+        │ (flood, forest)         │
+        └─────────────────────────┘
+```
+
+**Official fact:** The Land Stack pilot is explicitly designed to integrate exactly these layers into one parcel-centric platform. For example, it will let a user click on a parcel map and immediately see its RoR ownership, registration history, allowed uses, encumbrances, and so on.
+
+# Land Stack Pilots in Chandigarh and Tamil Nadu
+
+On **31 December 2025**, the Ministry of Rural Development launched pilot versions of Land Stack in Chandigarh (a Union Territory) and in Tamil Nadu. These pilot platforms are the **first real implementations of the Land Stack idea**.
+
+From official reports:
+- The Land Stack pilot provides a **single-window GIS platform** where citizens and government officials can access integrated parcel info.  
+- It **integrates land, ownership, registration, and building data**. In Chandigarh, for example, the portal (landstack.chd.gov.in) is run by the city government and NIC. It shows cadastral maps overlaying ownership names, sale deeds, encumbrances, and litigation cases for each parcel.
+- Key departments involved include Revenue, Survey, Registration, and Urban Planning. The system uses open APIs and GIS tools to tie their data together.
+- One feature is the ability for citizens to **search by ULPIN or address** and view parcel information in real time. There are also plans for tracking mutation status and applying for services through the portal.
+
+So far, the pilots demonstrate:
+- A geospatial interface showing parcels (Base Layer).  
+- Preliminary layers of RoR (rights) and maybe some registration data.  
+- Role-based dashboards for officers and a public portal for citizens.  
+- The new **Glossary of Revenue Terms** (GoRT) was also released to ensure users see consistent terminology across these pilots.
+
+These initial pilots are meant to test the architecture. After success in Chandigarh and Tamil Nadu, the plan is to expand to one city and one village in each state, then nationwide.
+
+# Connecting Land Stack with Existing Systems
+
+Land Stack is part of India’s broader land tech ecosystem. Here is how it relates to other initiatives:
+
+- **DILRMP:** This is the umbrella program under which Land Stack is conceived. Land Stack builds on DILRMP’s work of computerizing RoRs and maps. DILRMP has driven most states to digitize ownership and cadastral data. Land Stack uses that data and adds the integration layer.
+
+- **ULPIN (Bhu-Aadhaar):** As noted, ULPIN is the recommended key across all systems. Land Stack treats ULPIN as the common identifier linking data. The Year-End Review calls ULPIN the “Aadhaar for Land” and notes it is assigned to 36+ crore parcels. Any state system integrated with Land Stack should support ULPIN for each parcel.
+
+- **NAKSHA:** NAKSHA provides high-resolution parcel data for cities. Land Stack can consume NAKSHA outputs for its Base Layer in urban areas. For example, if NAKSHA surveyed Chennai, those parcel boundaries go into Land Stack.
+
+- **Bhu-Naksha:** These are state GIS solutions for cadastral maps. Land Stack may either use data from Bhu-Naksha portals or import their data. For instance, AP’s Bhu-Naksha integrates with AP’s land records; Land Stack can pull from that if integrated.
+
+- **Ente Bhoomi (Kerala):** This is Kerala’s integrated system. Land Stack would not replace it, but could interoperate. Kerala could expose APIs from Ente Bhoomi to Land Stack, sharing parcel info via ULPIN.
+
+- **NGDRS:** This is the national registration system. Land Stack can link to NGDRS for information on recent transactions. For example, after a sale is registered on NGDRS (used by 17 states), that information (buyer, seller, deed info) could flow into the Land Stack layer for that parcel.
+
+- **State land systems:** Every state has its own software (e.g. Jamabandi Online in UP, Bhulekh in Bihar, Khatauni systems, etc.). These remain the “authoritative” source in each state. Land Stack will not replace them, but rather connect to them via APIs. For instance, Land Stack might use a state’s online RoR API or database extracts to get owner names.
+
+**In simple terms:** Think of Land Stack as a *federated* system. It sits above all the state and central systems, talking to each. DILRMP and ULPIN set common rules; NAKSHA, Bhu-Naksha, state portals and registration systems provide the data; and Land Stack unifies it for users. It’s like having a smartphone (Land Stack) that can run apps from many providers (state systems) via agreed interfaces (APIs).
+
+A simple relationship diagram:
+
+```
+  [State Land Records]   [Survey Dept]   [Registration Dept]  [Municipal/Tax] 
+           \              |                |                 /
+            └─── Common API/Data Model ──┘
+                       ↓
+                  [Land Stack]
+                       ↓
+                  [Citizen/Govt Apps]
+```
+
+Where:
+- State/Survey/Reg use a common ID (ULPIN) and share data via APIs. 
+- Land Stack sits on top integrating them. 
+
+Officially, the government encourages states to expose open APIs and use common schemas so Land Stack can plug in.
+
+# Why Does the Centre Need Land Stack if Land Is a State Subject?
+
+Land administration is indeed mainly a **State responsibility** (Constitution, 7th Schedule, Entry 18). Each state makes its own rules. So why is the central government building Land Stack?
+
+- The Centre **funds and helps coordinate** modernization for all states. It does not take over their data, but provides a **common framework and standards**. For example, ULPIN, MDMS (metadata), e-governance guidelines, etc., come from the Centre and help all states interoperate. The Centre can encourage best practices without forcing states to change laws.
+
+- A common digital platform like Land Stack can **benefit national-level objectives** (like transparency and loans) without violating federalism. For instance, a farmer might borrow from a bank in one state using land in another state as collateral; ULPIN and Land Stack can help verify the land’s records across states.
+
+- Shared infrastructure can reduce duplication. If every state built its own GIS integration hub, costs and inconsistency would grow. Land Stack provides a **scalable template**. States can plug into it rather than reinvent the wheel.
+
+- National planning: Central schemes (like infrastructure, smart cities, agriculture) need land data. Land Stack can serve as a repository of harmonized land data useful for planning across states. It also helps in preventing inter-state fraud (e.g., proving if the same land was hypothecated in two states under a faked survey number).
+
+- It’s similar to other national systems (like PAN cards for tax, which are state matters but have a central unique ID). 
+
+In summary, **Land Stack is a framework for interoperability and shared data, not a takeover of state systems**. The states *keep* their data, but the Centre provides a backbone to connect them. This is why the government emphasizes Land Stack as a “common interoperable State-level framework” rather than a single database owned by the Centre.
+
+# How Would States Connect to Land Stack?
+
+States are at different stages of digitization. Here are possible scenarios for integrating a state’s land data into Land Stack:
+
+1. **State with modern database & APIs:** For example, a state might already have a digital land records system (like Kerala’s ILIMS or AP’s Bhoomi) with a web API or services that can return parcel info by ULPIN or Survey No. In this case, Land Stack can *directly call those APIs* to fetch data. Data flow:  
+   ```
+   Land Stack ←← (API call) ←← State Land Records System
+   ```
+
+2. **State with database but no APIs:** Some states have digitized records but no online API. They might, however, export data (e.g., nightly dumps or ETL). In this case, a technical solution is needed: either build a simple adapter or have Land Stack periodically import data files. Data flow:  
+   ```
+   State Land DB → (Export/Transform) → Land Stack Database
+   ``` 
+   This might involve standard exchange formats (e.g. CSV or JSON with defined schema).
+
+3. **State with multiple legacy systems:** Many states had separate systems for RoR, maps, registration. Some are now being integrated by state-specific projects (like connecting SRO with revenue). If a state still has fragmented systems, the state may need an **intermediate integration layer** (like a state GIS hub) that unifies them. Then Land Stack connects to that hub. Data flow:  
+   ```
+   Survey DB ┐
+   RoR DB ──┼── State Integration Layer API ── Land Stack
+   Regn DB ┘
+   ```
+
+4. **State lacking digital data:** If records are not fully digitized (e.g. old paper maps), first they must undertake **digitization** (scanning maps, entering RoR data). Land Stack cannot use what isn’t digitized. So the state would need to convert data to digital form before connecting.
+
+In all cases, the goal is to map the state’s local fields into Land Stack’s **common data model**. For example, if Kerala calls something “Re-survey No.” and Maharashtra calls it “Survey No.”, the data connector will label both as “local parcel identifier” in the Land Stack schema. 
+
+**Inference:** The challenge is interoperability, not replacing state systems. States might need some work (APIs, data cleaning) to plug into Land Stack, but the idea is that Land Stack provides the common language and endpoints so states only need to translate once.
+
+# Common Data Model
+
+To let Land Stack understand data from different states, it uses a **common data model**. This model defines generic fields like:
+- `ulpin`: Unique Land Parcel ID.  
+- `state`, `district`, `block`, `village`: location hierarchy.  
+- `survey_no`, `subdivision_no`, `dag_no` etc.: local parcel identifiers (stored as two parts: type and value).  
+- `area`, `owner_name`, `land_class` etc.: universal attributes.
+- `geometry`: the parcel polygon coordinates.
+
+Each state’s data is mapped into this structure. For example, Kerala’s “Re-Survey No.” and Maharashtra’s “Khasra No.” would both go into `survey_no`. If they use different terminology, the state database loader might do:
+```
+if state == Kerala:
+    survey_no = local_re_survey_no
+elif state == Maharashtra:
+    survey_no = local_khasra_no
+```
+(Under the hood, that is “semantic mapping.”)
+
+Importantly, we do **not** throw away state terms. The record might still show “Re-Survey No.: 49/1” on the portal. But in the backend, we also tag it with what type of reference it is. 
+
+Example record in common model:
+```
+parcel: {
+  ulpin: "1234ABCD5678EF",
+  state: "Kerala",
+  district: "Ernakulam",
+  survey_no: "49",
+  subdivision_no: "1",
+  area_sqm: 292.94,
+  owner: "John Doe",
+  use: "Residential",
+  ...
+}
+```
+Different states fill the fields differently but Land Stack sees them in one table. This does *not* delete the original survey numbers; it just links them to a universal framework.
+
+**Inference:** A key design choice is that the common model stores “local reference type” and “local reference value” along with the parcel, so we know exactly what each local label means. This ensures no data is lost – we are only adding a layer of abstraction for Land Stack’s use.
+
+# Technical Side (Slowly)
+
+Land Stack’s backend would use technologies similar to any modern web platform, but with a geospatial focus. Key components include:
+
+- **Geospatial Database:** A spatial database like **PostgreSQL with PostGIS** is a strong choice. It can store parcel polygons (geometry) and attributes (owner, ID, etc.) in one place. PostGIS supports spatial queries (e.g. finding parcels in an area) and stores the coordinates of each parcel.
+
+- **API (Application Programming Interface):** Land Stack will expose data via APIs. These APIs allow state systems and front-end apps to get parcel data or search parcels. An API standard (like REST or OGC’s API standard for geospatial data) would be used. The centre wants open APIs so that any department’s system can talk to Land Stack and vice versa.
+
+- **Metadata and Standards:** For data to be shareable, common standards (like ISO and OGC for GIS data, MDMS for fields) should be used. Land Stack might use standard formats like **GeoJSON** for spatial data, and adhere to the government’s **API guidelines** (for example, having documented endpoints).
+
+- **Authentication & Access Control:** Since sensitive data is involved, the system needs a secure login (e.g. using OAuth2 or single sign-on as in Ente Bhoomi). Role-based access ensures that a citizen sees only public info (maybe just ownership and tax data) while an official can see more (like mutation entries). Audit logs track who accessed/changed what.
+
+- **Hosting/Cloud:** Land Stack should be hosted on robust infrastructure, likely cloud-based (the problem statement mentions “cloud-native architecture”). This means using data centers or cloud services that can scale if many people use the site.
+
+- **GIS Services:** For the map display, standards like **Web Map Service (WMS)** or **Web Feature Service (WFS)** could be used. These are OGC standards that let you serve map tiles or vector data over the web. A GIS front-end like Leaflet or OpenLayers would talk to these services.
+
+- **Backend Integration:** There may be message queues or scheduled jobs to fetch updates from state systems. For instance, when a state uploads a new RoR file, a background job ingests it into Land Stack.
+
+None of these are particularly exotic; they are the tools used in e-government systems. The problem statement encourages some advanced tech (AI/ML, satellite), but the core doesn’t *require* AI. For a prototype, the focus is on getting **data integration and APIs** right.
+
+**Inference:** The challenge statement specifically mentions open APIs, standardized metadata, role-based access, audit trails, and scalable cloud architecture. It does not *require* any specific database or language, but in practice something like PostgreSQL/PostGIS is a common foundation for geospatial data.
+
+# Example Workflows
+
+Here’s how some real-world workflows would work once data is integrated in Land Stack:
+
+- **Property Sale Workflow:** 
+  1. Alice sells a parcel to Bob. They register the sale deed at the local Sub-Registrar (using NGDRS or state system).  
+  2. Because NGDRS and the revenue office are linked (as reported, ~88% integration), the system automatically creates a **mutation** entry in the RoR database for that parcel.  
+  3. Land Stack’s database gets updated (via API or daily sync) with the new owner name and deed info for Bob.  
+  4. On the citizen portal, Alice no longer appears as owner, and Bob is now listed. The parcel’s transaction history layer gets a new entry.  
+
+  Land Stack ensures that once the sale is done, the parcel’s combined map+registry view shows Bob as the current owner.
+
+- **Building Permission Workflow:**  
+  1. A builder logs into the urban local body’s portal and requests a building permit for parcel 49/1.  
+  2. The planner’s office checks Land Stack’s master plan layer: the Land Use layer says “Residential zone,” and the plan rules (perhaps also integrated) allow houses.  
+  3. The planner then approves or rejects. If approved, the permit data (e.g. approved building plan number) is written back to Land Stack’s "Building Permissions" layer via an API.  
+  4. A citizen querying the parcel can now see “Building approved on [date]” in Land Stack. 
+
+  This integration avoids the builder or officer having to manually cross-check separate maps and records.
+
+- **Dispute Workflow:**  
+  1. Suppose a boundary dispute arises for the parcel. The case goes to a Revenue Court.  
+  2. If Land Stack tracks disputes, an officer enters the dispute as a case record for that ULPIN (e.g. “Case #1234 filed on date”).  
+  3. The parcel gets flagged in Land Stack’s interface (maybe a red border).  
+  4. After resolution, the case is closed, and Land Stack is updated with the outcome and any boundary changes or title changes.
+
+In all examples, data flows from citizen/official action into Land Stack, and from Land Stack to the user interface. The system stitches together the information so that workflows spanning departments become smoother.
+
+# The Citizen’s View
+
+From a **citizen’s perspective**, Land Stack provides a simple way to get land information. A typical use might be:
+
+- **Search Parcel:** The citizen logs into the Land Stack portal (or app) and types a survey number, owner name, or address. Land Stack uses its database (with API calls in the back-end) to find the matching parcel polygon on the map.
+
+- **View Map:** The user sees the parcel highlighted on a map. They can zoom or pan. This map is like a Google Map but showing cadastral boundaries.
+
+- **View Parcel Info:** On clicking the parcel, a panel shows summary details:
+  - **Location:** State, district, village, survey number.  
+  - **Owner/Rights:** The name in the RoR (with date of last mutation) – this is where “legally available” info is shown. Some states already allow public viewing of digitized RoRs; Land Stack will do the same for all pilot data.  
+  - **Area:** Recorded area and any differences noted (e.g. “Survey area: 280 m², Revenue area: 292.94 m²” if they differ, citing sources).  
+  - **Use Zone / Plan:** If in an urban area, it might say “Residential Zone (Master Plan)” and any planning restrictions.  
+  - **Encumbrance:** It might show a link to the Encumbrance Certificate history so the user can download it (like a bank would see if the land is free of mortgages). 
+
+- **Check Transaction Status:** If the parcel was recently sold or there’s a pending mutation, Land Stack could show the status (e.g. “Mutation applied on [date], pending approval”). This depends on data connectivity with registration/mutation systems.
+
+- **Apply for Service:** There might be options like “Apply for Mutation,” “Apply for Building Permit,” or “Request Land Cert” – clicking these could open forms or redirect to the correct department. Land Stack would pass the parcel ID automatically to the form.
+
+- **Alerts:** Registered owners could get SMS/email updates (as Ente Bhoomi does) when something changes, like a deed is registered or a mutation is done.
+
+The citizen **should only see what they’re allowed to see**. In most cases, basic info (owner name, area, plan) is public. Some personal data (like owner’s address or loan info) would be restricted. Logging in (as Ente Bhoomi allows through Single Sign-On) gives more privileges – e.g., a rightful owner might download a certified RoR PDF.
+
+# The Government Officer’s View
+
+For officials, Land Stack is a dashboard of **everything about the parcel**:
+
+- **Parcel map:** The exact polygon (with survey sketch if needed).  
+- **Rights info:** The current RoR entry and mutation history.  
+- **Registration history:** All deeds or mortgages (from NGDRS or registrations).  
+- **Planning/Building:** Master plan designation, building permits, zoning lines.  
+- **Property tax:** Status of tax payments, pending dues (if connected to local tax DB).  
+- **Utility connections:** Water/electricity meter info (if integrated).  
+- **Disputes/Orders:** Any court cases or grievance applications on that parcel.  
+- **Audit trail:** Who viewed or changed this data and when (for accountability).
+
+An officer (say, a Tehsildar or Patwari) might use it to quickly answer questions: *“What is the extent of parcel 49/1 and who owns it?”* or *“Have any recent deeds been registered on this land?”*. They can click into layers to verify each piece of data. 
+
+There are also maps showing multiple parcels. For example, a revenue officer might see all parcels in a village colored by land-use, or the building permissions map. Planning officials can overlay zones. Layered maps help cross-check: if someone tries to build a factory in an agricultural zone, the map shows the conflict immediately.
+
+**Role-based access:** Not every officer can do everything. A tax official might see tax and cadastral data, but not personnel details. Land Stack would enforce the rule: “See only what you need.” This ensures security. For example, registry offices might not have edit access to RoR; they only update via registration events.  
+
+In sum, Land Stack aims to give **one-stop access** to all parcel info for an officer, rather than logging into 3-4 systems. This boosts efficiency and data accuracy.
+
+# Data Quality Issues
+
+Because multiple systems contribute data, inconsistencies can occur. Here are examples:
+
+- **Example 1:** The RoR (revenue record) says the area is “500 square meters,” but the digitized cadastral map says “470 square meters.” Why? Maybe the map hasn’t been updated after a minor correction, or vice versa. 
+
+  Official rule (as noted by PRS): If there is a discrepancy, **the RoR’s area prevails** (since that’s the last officially assessed value). Land Stack should show both values and cite the RoR as the source of truth. The officer will then update the records to resolve the difference if needed.
+
+- **Example 2:** In one system the parcel is called Survey 49, and in another it’s Survey 49/1. Perhaps the parcel was subdivided but one department forgot to update. 
+
+  Land Stack, using ULPIN, might detect this: both Survey 49 and 49/1 could map to the same ULPIN (meaning same physical land after subdivision). The system would flag that discrepancy. Officials would then investigate: maybe 49/1 was created in 2010 but the RoR still showed 49. This kind of mismatch is common when updates are not synced.
+
+- **Example 3:** The registration records (NGDRS) say the owner is “Mr. B” (a recent sale), but the RoR still lists “Mr. A” as owner (mutation pending). 
+
+  Land Stack would show a conflict: latest deed vs latest revenue record. It should display timestamps so users know which is newer. Until the revenue mutation is done, Land Stack would indicate “Owner (pending): Mr. B (Sale deed dated XYZ) vs Last Recorded Owner: Mr. A (RoR updated on date)”.
+
+These issues happen because data entry and updating are not always instantaneous or error-free. That’s why **transparency and source-tracking** are important: Land Stack should always cite the source (RoR, Map, Deed) for each piece of info. Users should be able to see “according to Department X’s data on this date.” 
+
+**Inference:** The goal of Land Stack is not to overwrite conflicting data silently, but to *present all the pieces* and let authorities reconcile them. The system should highlight inconsistencies and encourage updates to fix them.
+
+# Data History
+
+A robust system records changes over time. In Land Stack, each parcel could have a **history log** of key events. This would include:
+
+- **Creation** of ULPIN (date assigned) and initial entry.  
+- **Sales/Mutations:** Each time a mutation happens, record the old owner, new owner, date, and reference (document number).  
+- **Subdivisions/Mergers:** When a parcel is split or merged, note the old ULPIN(s) and new ULPINs and date.  
+- **Resurveys/Corrections:** If the map was updated, note what changed (e.g. area from 470 to 500) with date.  
+- **Mortgage/Encumbrance entries:** When a loan is registered or discharged, timestamp those.  
+- **Disputes:** When a case is filed/closed.
+
+This history lets users trace the life of the parcel. For example:
+```
+Parcel A History:
+- Jan 2015: ULPIN 123 assigned to Survey 49/1, Owner Alice.
+- Mar 2018: Sold to Bob (Mutation done). Owner now Bob.
+- Jun 2019: Subdivided into Parcel B (ULPIN 456) and Parcel C (ULPIN 789).
+- Jul 2019: Survey updated – new boundary coordinates.
+- Dec 2025: Building permit approved.
+```
+
+In practice, the system might record entries like a timeline or as part of the record fields. When Parish says “subdivided to B and C”, it could either retire A’s record or just note the split event (depending on design).
+
+Keeping history is vital for land because transactions can be disputed decades later. It also helps with queries like “who owned this land in 2010?” or “what was the original survey number?”
+
+# Security and Trust
+
+In a land system, trust and security are crucial. Here are the concepts in simple terms:
+
+- **Login & Identity:** Users (citizens or officials) must log in with verified identity. This could use India’s Single Sign-On (SSO) framework or Aadhaar-based login. It ensures we know *who* is accessing data.
+
+- **Permissions:** Not everyone should see or edit everything. For instance, a citizen should not see private data of other people’s land. Officials have roles: a Tehsildar in Village X may have full access to Village X’s records, but not to Village Y. Land Stack implements *role-based access* – it shows data based on your user role and jurisdiction.
+
+- **Encryption:** Data in transit (when you connect to the site) should be encrypted (HTTPS). Sensitive data stored should also be encrypted or secured.
+
+- **Audit Logs:** The system should record who viewed or changed data and when (an *audit trail*). For example, if RoR info is updated, Land Stack logs “Officer ABC updated owner from Alice to Bob on [date]”. This is important for accountability.
+
+- **Digital Signatures:** Official records (like RoRs) can be digitally signed to show they are authentic. India’s land records modernization now uses digitally signed RoRs. Land Stack should verify such signatures when importing records, ensuring the data is genuine.
+
+- **Data Ownership:** Each department remains the owner of its data. Land Stack itself is not the master. It’s more like a *referee* – showing where the data came from. For example, if the Revenue Dept says “Owner = X” on a date, Land Stack should show “As per Revenue records on [date] Owner = X”.
+
+- **Privacy:** Personal data (like an owner’s home address or Aadhaar) should be kept confidential. Land ownership is public, but other personal fields are sensitive. The system must hide or mask those as needed.
+
+- **Integrity:** We must trust that one person cannot fraudulently alter land records in Land Stack. That’s why actual changes should only happen in the source systems under existing legal processes. Land Stack’s updates to itself should be one-way, derived from source systems.
+
+**Inference:** Many of these practices (login, permissions, HTTPS, audit logs) are already standard for e-government (for example, Ente Bhoomi’s SSO login). Land Stack will follow those. The key difference is that Land Stack emphasizes **trust of source data** – it won’t pretend to be the source. It’s like a Wikipedia for land, but with locked editing: changes only come from official filings.
+
+# Artificial Intelligence (AI/ML)
+
+AI and Machine Learning can play a supporting role in land governance, but **they are not the core foundation** of Land Stack. The core is the **parcel-centric database and interoperability**. That said, there are some potential uses of AI/ML once the data is in place:
+
+- **Document OCR and Indexing:** Many land documents (old sale deeds, RoRs) are paper or scanned PDFs. AI/ML (like OCR) can extract text from them so they become searchable. For example, extracting names, plot numbers, areas from scanned historical records. This would speed up data entry and verification.
+
+- **Change Detection in Imagery:** If satellite or drone images are available (especially in NAKSHA areas), AI algorithms could automatically detect changes in buildings or land use. For instance, if a new building appears on a satellite image but no building permit is in the records, it could flag a possible violation.
+
+- **Anomaly Detection:** ML can spot anomalies in records. E.g., if two parcels share the same ID, or if a mutation history looks suspicious (very frequent transfers), it could alert officials. It could also reconcile two different datasets (maps vs RoR) by learning typical discrepancies.
+
+- **Citizen Help:** AI chatbots could answer common land queries by reading through the integrated database.
+
+However, it’s important to stress: **the challenge statement explicitly makes AI optional** – it says innovative uses of AI/ML are *encouraged* but are not the primary requirement. The **core** of Land Stack is parcel + geometry + government records + interoperability. AI is a bonus layer for analytics and efficiency improvements, not needed to get the basics working.
+
+# SIH26014 Requirements
+
+Let’s align what we’ve discussed with the actual hackathon problem (SIH26014) expectations. The problem statement explicitly asks for a Land Stack prototype. 
+
+### Explicitly Required:
+- A **parcel-based GIS platform** (so we need a map with parcels).
+- **Base layer**: cadastral maps with parcel boundaries and ULPIN.
+- **Essential layers**: integration of RoR (rights/ownership), registration data, land use, planning, building permits, encumbrances, etc.
+- **Additional layers**: things like utilities, tax, environment (optional depending on time).
+- **Single interoperable framework**: meaning the system should tie together data from different sources (like state systems) through APIs.
+- **APIs and standards**: open APIs, standardized metadata, role-based access, audit trails.
+- **Citizen services**: such as parcel search, ownership verification, tracking status.
+- **Administrative dashboards** for officials, showing parcel info and workflows.
+- **GIS visualization** of parcel data for exploration.
+- **Security**: since it’s government data (implied by secure architecture, role access).
+- **Technical Document**: They want details on APIs, data schemas, architecture, GIS standards, security, UI/UX, deployment, scalability (as listed in part 31).
+
+### Encouraged (but not required):
+- **AI/ML components**, satellite imagery analytics (the statement explicitly says “encouraged” for AI/ML, satellite change detection, predictive analytics, workflow automation).
+- **Innovative UI** like mobile accessibility, dashboards.
+- **Cloud-native design** is preferred.
+
+### Not Explicitly Required:
+- The exact data sources (we will likely use mock or sample data).
+- Only one city + one village as pilot per state is intended in problem, but for prototype, using just one or two samples is fine.
+
+### Our Proposed Features (NOT explicitly asked for):
+- We might add features like an AI chatbot or advanced analytics. If we mention them, we’ll clarify that they’re ideas beyond the core requirement.
+- Possibly mapping property tax or utilities (optional layer).
+
+In summary, the problem wants us to demonstrate an integrated parcel-centric land platform with multiple layers of data and interfacing with stakeholders, plus a technical spec. AI and extra bells are nice-to-have, not must-have.
+
+# Designing the Prototype
+
+**Goal:** Build a *small but realistic* Land Stack demo.
+
+## Data and Layers
+- **Base:** We need at least one parcel polygon with a ULPIN and location. We can use the Kerala example (or make up one). Use PostGIS or even a simple GeoJSON for it.
+- **Essential Layers:**
+  - **Record of Rights:** Simulate an RoR entry (owner name, last update date).
+  - **Registration:** Simulate a sale deed record (maybe just one recent sale).
+  - **Land Use / Planning:** Mark the parcel’s land use (e.g. “Residential Zone”).
+  - **Building permission:** If we have an urban parcel, pretend there’s a building plan on file.
+  - **Encumbrance:** Simulate a mortgage or show “none.”
+- **Additional Layers (if time):**
+  - **Property Tax:** e.g. tax due/not due.
+  - **Utilities:** e.g. show water pipe near parcel (could skip if too much).
+  - **Environment:** e.g. mark a floodplain (if relevant) or a tree cover.
+  
+We can keep the data small. The focus is demonstration, not volume.
+
+## Integration and API
+- We can simulate “two states” to show integration:
+  - State A’s data (maybe Kerala) and State B (maybe Maharashtra).
+  - Each state can have slightly different field names. We merge them via ULPIN.
+- We need an API or microservice layer:
+  - For prototype, maybe just build a small server (Flask or Node) that serves parcel info from an internal DB (or even static JSON).
+  - Or do a pure static demo with JavaScript. But since APIs are required, better to code a minimal backend.
+
+- **Common data model:** Internally, store everything in one schema. For integration, if we had two sources, we’d write code to map fields. For prototype, maybe skip multiple sources and assume one source.
+
+- **Source tracking:** The API can include a field like `source_system: "Revenue"` on each item.
+
+## User Interfaces
+- **Citizen interface:**
+  - A web page with a simple search box (by ULPIN or survey no).
+  - When a parcel is found, show a map (e.g. using Leaflet) with the polygon drawn.
+  - A panel listing parcel info: ULPIN, survey no, area, owner, etc. Use friendly terms (“Owner Name” instead of code).
+  - Maybe have a tab for different categories (Ownership, Registration, Planning).
+  - Add a “Status” indicator if something pending (mutation).
+  
+- **Government interface:**
+  - We can either make the citizen UI also show all data if “logged in as officer”, or have a separate page.
+  - For simplicity, maybe add a “login” switch on the same interface. If “Officer Mode” is toggled, show extra fields:
+    - Mutation register link, audit log entries, edit buttons.
+    - Maybe show encoded ID of data source, e.g. “Data fetched from State Revenue DB”.
+  
+- We might skip implementing real login, but could simulate: e.g. a dropdown “View As: Citizen / Official”.
+  
+- If we include multiple parcels, maybe allow clicking parcels on map.
+
+## Unique Parcel ID
+- Use a made-up ULPIN (14 chars, e.g. “1234ABCD5678EF”). Make it clearly based on coordinates if we want (or just random).
+- Or if we take our Kerala example coords, we could auto-generate some ULPIN.
+
+## AI / Extra
+- Possibly include a very simple analysis: e.g. a button “Check data consistency” that prints any differences found.
+- Or skip AI entirely to focus.
+
+## Tech Stack
+- **Backend:** Maybe use Python with Flask and a PostGIS (or even just static files if easier). But then how to get geographic queries? Could skip advanced queries.
+- For demonstration, even a JSON file with parcel attributes could feed the frontend.
+- **Frontend:** HTML/CSS/JS (Leaflet for map, Bootstrap for UI). 
+- If we embed a map, need a tile layer or no base (just polygon).
+- Possibly draw on OpenStreetMap for context.
+
+Given time, a simpler static/JS approach might suffice, but the prompt expects mentioning DB/API, so maybe at least design as if we have them.
+
+## Example Data
+For credibility, use the given Kerala example:
+- Parcel coordinates (we don't have real ones). We could make a polygon around Kanayannur in Ernakulam (like a rectangle).
+- Owner: "A. Divakaran".
+- Last mutation: "A. Divakaran -> B. V. Gopal, 2024-05-10".
+- Land use: "Residential".
+- Encumbrance: "Mortgage with Bank XYZ until 2025-12" (just example).
+- Building permit: e.g. "Building Permit #BP123 issued 2022-11".
+
+For another state (optional):
+- Parcel in Tamil Nadu (Chennai suburb?).
+- Or skip and note multi-state in description.
+
+At minimum, ensure at least one real-looking example to illustrate fields.
+
+## Prototype scope
+The smallest realistic:
+- Backend API with 1 endpoint (GET /parcel?ulpin=...). Or just embedded data.
+- Frontend page with map and info.
+- Possibly an "admin view".
+- Document how to run.
+
+We should not code it, but describe it. Possibly a diagram.
+
+# Technical Document Content
+
+A **Standard Technical Document** for Land Stack should cover (in simple terms):
+
+1. **API Standards:** It should specify how APIs are designed. For example, using RESTful HTTP with JSON. It should list endpoints like `/parcels`, `/parcels/{id}`, `/search`. It should mention authentication (OAuth2, SSO).  
+   *What to include:* Example API calls, request/response formats, error codes.
+
+2. **Interoperability Standards:** This covers how different systems share data. For spatial data, mention OGC standards (WFS/WMS/OGC API). For metadata, mention using MDDS (Meta Data and Data Standards) protocols from MeitY. It should say all data fields follow these common standards (e.g., ISO 19115 for geospatial metadata).  
+   *What to include:* Agreed data exchange formats (like GeoJSON with defined schema).
+
+3. **Data Schemas:** The document should define the data model. That means listing the common fields for parcels, like ULPIN, owner, area, etc., and data types (text, number, geometry). It could include an Entity-Relationship (ER) diagram showing tables: Parcels, Owners, Transactions, Permissions.  
+   *What to include:* Field definitions with examples, and how to represent list-of-records (like ownership history).
+
+4. **System Architecture:** A diagram and description of how components fit together. For example: 
+   - A client app connects to the Land Stack server through an **API Gateway**. 
+   - The server has a **GIS database** (e.g. PostgreSQL/PostGIS). 
+   - There may be a **Data Integration Module** that fetches/updates state data. 
+   - Use of a **Cloud hosting environment** (like India’s Meghraj cloud). 
+   - Possibly microservices for different layers (RoR service, Map service, etc.).  
+   *What to include:* Architecture diagram with boxes (Web Client, API, DB, Auth service, etc.), and a description of data flow.
+
+5. **GIS Standards:** Explain which geospatial standards are used. E.g. coordinate reference system (e.g. EPSG:4326 for Lat/Long). Map tile standards if used.  
+   *What to include:* Mention using WGS84 lat/long, OGC Web Map Service (WMS) for maps, Web Feature Service (WFS) or OGC API - Features for vector queries.
+
+6. **Security Framework:** Explain authentication (e.g. JWT/OAuth tokens), authorization (role-based access), encryption (TLS). Also mention logging and audit. Possibly mention compliance with any government info sec guidelines (like CERT-IN or ISO 27001).  
+   *What to include:* User roles and permissions, how users login, how audit logs are kept.
+
+7. **UI/UX Guidelines:** Since it’s for citizens and officials, mention that the interface should be bilingual if needed (as per state language rules), follow digital India accessibility guidelines, be mobile-responsive, and use familiar design patterns (like dashboard for admin, map viewer for citizen).  
+   *What to include:* Mock screenshots (if possible), or guidelines on layout (e.g. search bar at top, map left, info panel right).
+
+8. **Color Scheme:** Possibly follow Digital India (DIKSHA) theme or state’s own guidelines. Many government sites use the Khadi # or tri-colors. Provide a palette of colors for UI (for example, base color Indian blue #120078, accent saffron #FF9933).  
+   *What to include:* Color swatches with names and usage (e.g. “Heading: Blue #0257A0, Buttons: Orange #FF9900”).
+
+9. **Deployment:** How/where to deploy. Likely use a secure cloud platform (NIC cloud or govt-approved cloud). Use containerization (Docker/Kubernetes) for scalability. Also mention backup and disaster recovery.  
+   *What to include:* Deployment diagram (e.g. multiple app servers behind load balancer, DB cluster), CI/CD pipeline, monitoring.
+
+10. **Scalability:** The system should handle growth. The doc should cover database scaling (e.g. PostGIS with partitioning by state or sharding), stateless API servers with load balancing, and horizontal scaling.  
+    *What to include:* Projections (like data from all 7L villages, say 100 crore parcels eventually), and how to handle (cloud auto-scale, caching strategies, geo-partitioning).
+
+Each section should first explain *what it is in general terms* (since it’s a beginner-friendly doc), then *what we propose for Land Stack*. For example, in API Standards: “Most modern services use RESTful APIs that send/receive JSON. We will adopt this because it’s widely supported. Each parcel can be accessed via GET /parcels/{ULPIN}. Data will be returned in JSON with fields (owner, area, coordinates) as defined in our schema.”
+
+Throughout, avoid jargon or explain it (e.g., “API (Application Programming Interface) – a way for two programs to talk to each other”).
+
+# Final Answer: Textbook-Style Summary
+
+Below is a simple Q&A style summary of key points, as requested:
+
+**Question 1: What is land governance?**  
+*Answer:* Land governance refers to how land is managed and regulated. It includes defining who owns or uses each piece of land, how land transactions happen, and how land use is planned and enforced. Good land governance means clear, efficient, and fair systems for keeping land records, resolving disputes, and planning land use. (Research finding: Poor land governance causes many disputes and slows development.)
+
+**Question 2: What happens to one parcel from physical land → survey → map → land records → sale → subdivision?**  
+*Answer:* Imagine a physical piece of land (a parcel). A surveyor measures its boundaries on the ground and records coordinates. These points make a polygon, which is drawn on a cadastral map. The map polygon and an identifier (like Survey No. 49) are entered into the land records. The Record of Rights (land register) links that parcel with an owner’s name. If the owner sells it, a sale deed is registered, and then the revenue records are **mutated** to show the new owner. If the parcel is subdivided, new smaller parcels are drawn on maps with new IDs; the old parcel is split into two new parcels. Throughout, official records (maps and text) get updated step by step, but usually after checks and approvals – the survey data isn’t final until records are settled. (Inference from sections above.)
+
+**Question 3: What are Record of Rights and Encumbrance Certificate?**  
+*Answer:* A **Record of Rights (RoR)** is the official land ownership register for a village/town. It shows who holds rights in that parcel (owner name, area, land class, etc.). It’s maintained by the Revenue Department. An **Encumbrance Certificate (EC)** is a document you get from the Registration Office that lists all registered transactions (like mortgages or liens) on the property for a given period. If the EC is clear, it means “no registered claims on this land”, so the property is free for sale (assuming no hidden problems). But the EC *alone* is not full proof of ownership; it just shows registered liabilities, not actual ownership (that’s in the RoR). 
+
+**Question 4: What is a cadastral map?**  
+*Answer:* A cadastral map is a large-scale map that shows land parcel boundaries and identifiers. It is used to precisely describe each piece of land (its size, shape, and ownership). In India, each village typically had such a map made during surveys. It is different from an ordinary road map – it focuses on property plots. It often shows boundary lines, parcel numbers (survey or dag numbers), and area. Historically, cadastral maps were used for taxation, but now they help identify land ownership and facilitate transactions. For example, our rectangle parcel from earlier would appear on a cadastral map with lines drawn on all sides and its Survey No. written inside.
+
+**Question 5: What is a parcel polygon?**  
+*Answer:* In GIS terms, a parcel polygon is the digital representation of a land parcel’s boundary. It is a closed shape (with corners P1, P2, P3, etc.) whose points are stored as coordinates. For example, the rectangle with corners (10,20), (30,20), (30,10), (10,10) is a polygon. Computers store that as a list of points. From this polygon, software can compute the parcel’s **area**, perimeter, and location. So a parcel polygon is basically the precise drawing of the land on a map in a computer. It can be used to overlay the parcel on a Google map or any map service, once it has the right coordinate system.
+
+**Question 6: What is the Unique Land Parcel Identification Number?**  
+*Answer:* The Unique Land Parcel Identification Number (ULPIN), also called **Bhu-Aadhaar**, is a 14-character code given to each land parcel in India. It acts like a permanent ID for the parcel, based on its GPS coordinates. Once assigned, that ULPIN stays with the *same piece of land* forever – even if the owner changes or if the parcel is resurveyed. ULPIN helps link all records about that parcel across different systems. It is *not* tied to the owner’s identity; it belongs to the land itself.
+
+**Question 7: Why are land systems different across Indian States?**  
+*Answer:* Because land is a State subject, each state has its own laws and history of land administration. Over time, different states (and even regions within a state) used their own terminology and formats. For example, one state may call a plot number “Khasra No.” and another may call it “Dag No.”. The shape of their record books also differs. Even the language and units can differ (meters vs acres, Hindi vs English scripts). The government recognizes this and is not forcing one uniform system, but rather promoting a **common framework** so these diverse systems can still talk to each other. For instance, a central glossary helps map local terms like ‘khasra’ to a common concept.
+
+**Question 8: What are Department of Land Resources, DILRMP and NAKSHA doing?**  
+*Answer:* The **Department of Land Resources (DoLR)** is the central agency under Rural Development that runs land modernization schemes. It funds and guides states in upgrading their land records. DOLR’s main scheme is the **Digital India Land Records Modernization Programme (DILRMP)**. DILRMP (since 2016) helps states computerize their Record of Rights and cadastral maps, integrate them, and connect with registration systems. It has succeeded in digitizing most villages: ~97% of villages have digital RoRs and maps. 
+
+**NAKSHA** is a pilot scheme under DILRMP for urban areas. It uses drones/aerial surveys to quickly map cities. As of 2025, NAKSHA covered 157 cities (ULBs) in 27 states, creating up-to-date GIS parcel maps for urban planning. 
+
+In summary, DoLR/DILRMP are building the base digital land infrastructure (digitized records, standard IDs), and NAKSHA is mapping cities at scale.
+
+**Question 9: What is Ente Bhoomi?**  
+*Answer:* *Ente Bhoomi* (Malayalam for “My Land”) is Kerala’s online land records portal. It is the citizen interface of Kerala’s Integrated Land Information and Management System (ILIMS). Through Ente Bhoomi, Kerala citizens can view their survey records, download RoR, apply for mutations, and even do template-based registration. It integrates services of Survey, Revenue, and Registration departments into one platform. It was launched as part of Kerala’s digital resurvey mission (with advanced GPS surveys) and it shows the promise of an integrated local land records system, much like Land Stack aims to do nationally.
+
+**Question 10: What exactly is Land Stack?**  
+*Answer:* Land Stack is India’s proposed unified land governance platform. It is a **parcel-centric GIS framework** that layers all land-related data on top of each parcel’s map and ULPIN. It has a **base layer** of accurate cadastral parcel polygons (with ULPINs), *essential* layers of core land records (RoR, registration deeds, land use plans, etc.), and *additional* layers (tax records, utilities, environmental zones, etc.). The platform will let officials and citizens see, on one map interface, everything about a parcel: who owns it, what encumbrances it has, what uses are allowed, etc. In short, Land Stack is an **integrated GIS-based digital public infrastructure** – essentially a comprehensive land information system for the whole country.
+
+**Question 11: What has already been built in the Land Stack pilots?**  
+*Answer:* As of 31 Dec 2025, pilots have been launched in **Chandigarh and Tamil Nadu**. The pilots include:
+- A web portal/portal for Chandigarh (and one for TN) that shows an integrated parcel map. These portals (landstack.chd.gov.in for Chandigarh) allow users to search parcels and view combined data layers (ownership from revenue, transaction from registration, cadastral maps, etc.).
+- In Chandigarh, the Land Stack portal displays parcel boundaries on the map and overlays data such as owner names, encumbrance info, and legal cases.
+- The pilots demonstrate features like **single-window access**, role-based dashboards for officers, and citizen functions (like parcel search and certificate downloads).
+- The pilots were built using data from the respective regions. In Chandigarh’s case, NIC developed the portal using local land records. In TN, a similar environment was prepared (details were officially launched by the MoS for Rural Dev).
+- They also launched the **Glossary of Revenue Terms (GoRT)** to standardize terminology across states.
+
+However, these pilots are very new (just launched). They likely contain basic layers (cadastral maps, RoR, registration). More advanced integration (utilities, AI analytics) would be future work. Official sources [22] and [64] confirm the launch and general features, but detailed demos/screenshots were limited at that time.
+
+**Question 12: What does the Government actually want participants to build?**  
+*Answer:* The problem statement asks for a **prototype of Land Stack**. Specifically:
+- A *parcel-centric GIS platform* with integrated data layers. It should show how different datasets (RoR, registration, etc.) connect at the parcel level.
+- It should demonstrate **parcel visualization** (map of parcels with data).
+- It should include **mock or sample data** for land records (even if not real data) to show how layers integrate.
+- It should support **interoperability** – e.g. simulate data flow between departments via APIs.
+- It should include **user interfaces**: at least a map/portal view for citizens (search parcel, see info) and an admin view for officials (edit/update, dashboards).
+- It should show **APIs and standards** (the technical document is part of the deliverable).
+- It’s not enough to make just a map – it must be a functioning prototype with data integration, not just a design. 
+
+In plain terms, they want a **small-scale working model** of Land Stack, not just a diagram. This means coding a simple version with a parcel layer and some data layers, with user interactions. They also specifically asked for a **Standard Technical Document** describing the architecture, APIs, data schemas, etc.
+
+**Question 13: What should remain with State systems?**  
+*Answer:* Each **state’s original land database and authority** should remain untouched by the Centre. The states keep their RoRs, maps, and registration records as the official source of truth. Land Stack does not replace those; it only reads from them. For example:
+- The **land ownership register** (RoR) in each state’s revenue office remains where it is (like a "copyright" held by the state).
+- **Registration offices** in states continue handling sale deeds and mutations.
+- **Survey and planning** departments still control surveying and planning operations.
+Land Stack will fetch data from them via APIs but will *not override or store the canonical data centrally*. The states decide what to share via APIs, just as on Ente Bhoomi the Kerala government decided to put the data. Essentially, Land Stack is a **layer on top**, not a replacement. States might develop their own API endpoints (or use DILRMP gateways) for Land Stack to use. 
+
+**Question 14: What should the common Land Stack framework provide?**  
+*Answer:* The Land Stack framework provided by the national program should include:
+- A **common data model** (schema) so different states’ data can plug in. For instance, a definition of “parcel” and its fields (owner, area, etc.) that works for all states.
+- **Standard APIs:** templates or guidelines for how states should expose their data (e.g., a REST API with given endpoints and data formats).
+- **Integration tools:** maybe a central API gateway or message bus that connects to state systems.
+- **Reference implementation:** example code (perhaps NIC or open source) demonstrating how to use the model.
+- **Technical guidelines:** Documentation on data standards (metadata, coordinate systems, security protocols) that all should follow.
+- Possibly a central lookup or service for ULPIN generation (though ULPIN sites exist).
+In short, the framework is like an instruction kit and toolkit. It should make it easy for a state IT system to “plug into” the national Land Stack, rather than each state figuring out integration from scratch. (This is implied by references to “common interoperable State-level framework” in the problem statement.)
+
+**Question 15: What should a student team actually prototype?**  
+*Answer:* A student team should build a **mini Land Stack platform**. Concretely, this means:
+- Implement **one or a few parcel polygons** with ULPIN. (Use sample data if needed.)
+- For those parcels, create mock data for **RoR fields** (owner name, etc.), a mock **sale deed entry**, and maybe a “planning zone” value. Also one or two simple encumbrance or tax entries.
+- Build a simple web interface or application where you can **search a parcel (by ULPIN or survey no.)**, view it on a map, and see all that data tied to it.
+- Demonstrate an API (or simulated API) that serves this data (to show interoperability).
+- Include at least two data categories (e.g. Ownership and Encumbrance) to show layering.
+- Possibly simulate a change: e.g. clicking “Mutate Owner” to change the owner in one layer (for admin mode).
+- Provide the **technical document** describing your chosen tech stack (e.g., “we used PostgreSQL/PostGIS, OpenLayers for map, etc.”) and data model.
+- Focus on showing the **integration concept** rather than perfect UI or full-scale data. (They should see the gist: parcel polygon + unified info.)
+
+We must NOT waste time building something that already exists at scale (like entire NAKSHA or NGDRS) – the point is showing how a unified system could work. Use small, clear examples to illustrate each concept (like one parcel example).
+
+# SIH26014 in One Picture (Final Diagram)
+
+Putting it all together, a full beginner-friendly architecture diagram would look like this (ASCII art):
+
+```
+REAL LAND (in the village)
+    ↓ [Survey]
+SURVEY (field measurements → boundary points)
+    ↓ [Digitize]
+BOUNDARY POINTS & COORDINATES
+    ↓ [Map creation]
+GIS POLYGON (parcel shape in database)
+    ↓ [Assign ID]
+UNIQUE PARCEL ID (ULPIN)
+    ↓ [Join data]
+LAND RECORDS (ownership & rights in RoR)
+    ↓ [Property registration]
+REGISTRATION (deeds, ECs)
+    ↓ [Other data]
+PLANNING/TAX/UTILITIES/RESTRICTIONS (various databases)
+    ↓ [Integration]
+LAND STACK PLATFORM (GIS-enabled portal with layers)
+    ↓ [Common framework]
+COMMON STATE FRAMEWORK (APIs, standards, data model)
+    ↓ [Outcome]
+INTEROPERABLE LAND GOVERNANCE (citizen/officer applications)
+```
+
+This flow chart shows:
+- Starting from the **real physical land**, it gets surveyed into coordinates.
+- Those coordinates create a **GIS polygon**.
+- A **unique ID (ULPIN)** is assigned.
+- Different records (RoR, registration, planning, etc.) attach to that ID.
+- Land Stack uses that integrated data to provide unified services.
+- All of this is built on a common framework of APIs and data standards.
+
+The final label could be:
+
+**“SIH26014 in one picture”**
+
+And beneath it:
+
+- **What government has:** Separate systems (Revenue, Survey, Registration, etc.) in each state.
+- **What Land Stack adds:** Unified parcel-centric GIS layer with standardized ID (ULPIN) and integrated data via APIs.
+- **What to prototype:** A working demo with sample parcels showing base layer + essential layers + simple UI for search and display.
+- **What NOT to build:** Don’t rebuild entire state ROR/registration systems. These already exist. The team should focus on integration and front-end.
+- **Uncertainties:** How exactly states will provide APIs, or how legacy data sync will be done – these need official confirmation. We assume APIs/ETL are possible, but real implementation details are still being worked out.
+
+Finally, conclude honestly:
+> **Conclusion:** India now has digital RoRs and maps in most places. Land Stack adds the integration on top: a parcel-based platform to view and connect all land data. SIH26014 expects us to demonstrate this idea with a prototype showing a map, parcel ID (ULPIN), and some sample data layers (rights, registrations, etc.). State systems (like Ente Bhoomi or Bhoomi portals) will remain the masters of data. Land Stack’s job is to query them via APIs or data feeds and display it coherently. A student team should therefore build a small application with a base parcel polygon, assign it a dummy ULPIN, attach mock RoR and registration info, and show a basic map interface for citizens and officers. They must also outline the technical standards (open APIs, GIS formats, security) but they should not attempt to digitize or replace real land records. What remains uncertain is exactly how each state will expose its data – for now we assume a combination of APIs or file exports into the Land Stack common database.
+
+**Sources:** Government and expert sources have been used throughout to define terms and confirm facts. Wherever details are not yet in public documents, we have noted that we “could not verify from official sources.” For example, the real status of pilot data and state APIs is still emerging. Overall, this answer is based on official program descriptions and land records references.
+
